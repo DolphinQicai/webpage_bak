@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<style>
+	.button {
+		display: inline-block;
+		border-radius: 4px;
+		background-color: #f4511e;
+		border: none;
+		color: #FFFFFF;
+		text-align: center;
+		font-size: 28px;
+		padding: 20px;
+		width: 400px;
+		transition: all 0.5s;
+		cursor: pointer;
+		margin: 5px;
+	}
+
+		.button span {
+			cursor: pointer;
+			display: inline-block;
+			position: relative;
+			transition: 0.5s;
+		}
+
+			.button span:after {
+				content: '»';
+				position: absolute;
+				opacity: 0;
+				top: 0;
+				right: -20px;
+				transition: 0.5s;
+			}
+
+		.button:hover span {
+			padding-right: 25px;
+		}
+
+			.button:hover span:after {
+				opacity: 1;
+				right: 0;
+			}
+</style>
+
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>原神计算器</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='../assets/css/main.css'>
+    <script></script>
+</head>
+<body>
+    <!-- Header -->
+	<section id="header">
+		<header>
+			<span class="image avatar"><img src="" alt="" /></span>
+			<h1 id="logo"><a href="#">Dolphin期材</a></h1>
+			<p>
+				
+			</p>
+		</header>
+		<nav id="nav">
+			<ul>
+				<li><a href="#one" class="active">人物选择</a></li>
+				<li><a href="#two">攻击力 暴击率 暴击伤害</a></li>
+				<li><a href="#three">天赋等级</a></li>
+				<li><a href="#four">武器选择</a></li>
+				<li><a href="#five">圣遗物选择</a></li>
+				
+				<li><a href="#six">精通、元素伤害</a></li>
+				<li><a href="#seven">减抗 减防 增伤</a></li>
+				<li><a href="#eight">伤害独立乘区</a></li>
+				<li><a href="#nine">最终总伤害</a></li>
+				
+			</ul>
+		</nav>
+		<footer>
+			<ul class="icons">
+				<li><a href="https://twitter.com/aLZxMOtm2mb4b0X" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
+				
+				<li><a href="https://github.com/DolphinQicai" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li>
+				
+			</ul>
+		</footer>
+	</section>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- One -->
+			<section id="one">
+				<div class="image main" data-position="center">
+					<img src="../images/banner.jpg" alt="" />
+				</div>
+				<div class="container">
+					<header class="major">
+						<h2>原神计算器</h2>
+						<p>
+							目前只有神里，而且后面的功能不是很完善
+						</p>
+						<h5>之后会持续更新（大概</h5>
+					</header>
+					<p>
+						<br />
+						人物选择：
+						<br />
+						<select id="Person" style="width: 300px">
+							<option value=0>神里绫华</option>
+										
+						</select>
+						<br />
+						人物等级：
+						<br />
+						<select id="Persongrade" style="width: 300px">
+							<option value=0>70</option>
+							<option value=1 selected="selected">80</option>
+							<option value=2>90</option>
+						</select>
+
+						<br />
+					</p>
+				</div>
+			</section>
+
+			<!-- Two -->
+			<section id="two">
+				
+				<div class="container">
+					<header class="major">
+						<h3>攻击力 暴击率 暴击伤害</h3>
+						<p>
+							<br />
+							攻击力：
+							<br />
+							<!-- 这里放攻击力的输入框 -->
+							<br />
+							暴击率：
+							<br />
+							<!--  这里放暴击率的输入框 -->
+							<br />
+							暴击伤害：
+							<br />
+							<!--  这里放暴伤的输入框 -->
+							<br />
+						</p>
+						<h5></h5>
+					</header>
+					<p>
+						
+					</p>
+				</div>
+			</section>
+
+			<!-- three -->
+			<section id="three">
+				<div class="container">
+					<h3>天赋等级</h3>
+					<p>
+						<br />
+						平a等级：
+						<br />
+						<select id="pingatianfudengji" style="width: 300px">
+							<option value=0>1</option>
+							<option value=1>2</option>
+							<option value=2>3</option>
+							<option value=3>4</option>
+							<option value=4>5</option>
+							<option value=5>6</option>			
+							<option value=6>7</option>
+							<option value=7 selected="selected">8</option>
+							<option value=8>9</option>
+							<option value=9>10</option>
+							<option value=10>11</option>
+						</select>
+						<br />
+						E技能等级：
+						<br />
+						<select id="etianfudengji" style="width: 300px">
+							<option value=0>1</option>
+							<option value=1>2</option>
+							<option value=2>3</option>
+							<option value=3>4</option>
+							<option value=4>5</option>
+							<option value=5>6</option>			
+							<option value=6>7</option>
+							<option value=7 selected="selected">8</option>
+							<option value=8>9</option>
+							<option value=9>10</option>
+							<option value=10>11</option>
+							<option value=11>12</option>
+							<option value=12>13</option>
+						</select>
+						<br />
+						Q技能等级：
+						<br />
+						<select id="qtianfudengji" style="width: 300px">
+							<option value=0>1</option>
+							<option value=1>2</option>
+							<option value=2>3</option>
+							<option value=3>4</option>
+							<option value=4>5</option>
+							<option value=5>6</option>			
+							<option value=6>7</option>
+							<option value=7 selected="selected">8</option>
+							<option value=8>9</option>
+							<option value=9>10</option>
+							<option value=10>11</option>
+							<option value=11>12</option>
+							<option value=12>13</option>
+						</select>
+						<br />
+					</p>
+				</div>
+
+			</section>
+
+			<!-- four -->
+			<section id="four">
+				<div class="container">
+					<h3>武器选择</h3>
+					<p>
+						<br />
+						武器等级：
+						<br />
+						<select id="weapongrade" style="width: 300px">
+							<option value=0>70</option>
+							<option value=1 selected="selected">80</option>
+							<option value=2>90</option>
+							
+						</select>
+						<br />
+						武器选择：
+						<br />
+						<select id="weapon" style="width: 300px">
+							<option value=0 selected="selected">雾切之回光</option>
+							<option value=1>黑剑</option>
+							<option value=2>风鹰剑</option>
+							<option value=3>天目影打刀</option>
+							<option value=4>雪山薄荷</option>
+							<option value=5>卢锅巴</option>
+							<option value=6>咸鱼</option>
+						</select>
+						<br />
+						
+					</p>
+				</div>
+			</section>
+
+			<!-- five -->
+			<section id="five">
+				<div class="container">
+					<h3>圣遗物选择</h3>
+					<p>
+						<br />
+						
+						<br />
+						<select id="圣遗物" style="width: 300px">
+							<option value=0 selected="selected">四冰套</option>
+							<option value=1>四绝缘</option>
+							<option value=2>四角斗</option>
+							<option value=3>四宗室</option>
+							<option value=4>四乐团</option>
+							<option value=5>二冰二绝缘</option>
+							<option value=6>二冰二角斗</option>
+							<option value=7>二冰二宗室</option>
+							<option value=8>二冰二乐团</option>
+						</select>
+						<br />
+						
+						
+					</p>
+				</div>
+
+			</section>
+			
+
+			
+
+			<!-- six -->
+			<section id="six">
+				<div class="container">
+					<h3>精通、元素伤害</h3>
+					<p>
+						<br />
+						精通：
+						<br />
+							<!-- 这里放精通的输入框 -->
+						<br />
+						<br />
+						元素伤害：
+						<br />
+						<select id="yuansushanghai" style="width: 300px">
+							<option value=0>水伤杯</option>
+							<option value=1 selected="selected">冰伤杯</option>
+							<option value=2>火伤杯</option>
+							<option value=3>雷伤杯</option>
+							<option value=4>风伤杯</option>
+							<option value=5>岩伤杯</option>
+							<option value=6>物伤杯</option>
+							
+						</select>
+						<br />
+						
+						
+					</p>
+				</div>
+
+			</section>
+
+			<!-- seven -->
+			<section id="seven">
+				<div class="container">
+					<h3>减抗 减防 增伤</h3>
+					<p>
+						<br />
+						
+						
+					</p>
+					<!-- <form>
+						<label> 钟离开盾</label><input type="radio" name="zhonglikaidun" />
+					</form> -->
+				</div>
+
+			</section>
+
+
+			<!-- eight -->
+			<section id="eight">
+				<div class="container">
+					<h3>伤害独立乘区</h3>
+					<p>
+						<br />
+						
+						
+					</p>
+					
+				</div>
+
+			</section>
+
+			<!-- nine -->
+			<section id="nine">
+				<div class="container">
+					<h3>最终总伤害</h3>
+					<p>
+						<br />
+						<!-- 这里放显示伤害的框 -->
+						<br />
+						
+					</p>
+				</div>
+			</section>
+
+
+
+		</div>
+
+		<!-- Footer -->
+			<section id="footer">
+				<div class="container">
+					<ul class="copyright">
+						<!--<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>-->
+
+					</ul>
+					<p>网站模板来源：<a href="http://html5up.net" target="_blank">HTML5 UP</a></p>
+				</div>
+			</section>
+
+	</div>
+
+<!-- Scripts -->
+	<script src="../assets/js/jquery.min.js"></script>
+	<script src="../assets/js/jquery.scrollex.min.js"></script>
+	<script src="../assets/js/jquery.scrolly.min.js"></script>
+	<script src="../assets/js/browser.min.js"></script>
+	<script src="../assets/js/breakpoints.min.js"></script>
+	<script src="../assets/js/util.js"></script>
+	<script src="../assets/js/main.js"></script>
+
+	
+</body>
+</html>
