@@ -13,5 +13,23 @@
             echo "<BR><BR>This is a PHP test page";
             ?>
         </div>
+        
+        
+        
+        <?php
+            $a=1;
+            $b=3;
+            $c=10;
+            while($a < $c)
+            {
+                $d = $a % $b;
+                if($d == 0)
+                {
+                    echo $a."是".$b."的倍数";
+                    echo "<BR>";
+                }
+                $a = $a + 1;
+            }
+        ?>
     </body>
 </html>
