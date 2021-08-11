@@ -38,26 +38,57 @@ q2[10] = 3.20
 q2[11] = 3.37
 q2[12] = 3.58
 
+var e1 = new Array()
+e1[0] = 2.39
+e1[1] = 2.57
+e1[2] = 2.75
+e1[3] = 2.99
+e1[4] = 3.17
+e1[5] = 3.35
+e1[6] = 3.59
+e1[7] = 3.83
+e1[8] = 4.07
+e1[9] = 4.31
+e1[10] = 4.54
+e1[11] = 4.78
+e1[12] = 5.08
+
 
 
 function gettianfu()
 {
+    var edocument = document.getElementById("etianfudengji");
     var qdocument = document.getElementById("qtianfudengji");
+    var exuanze = edocument.selectedIndex;
     var qxuanze = qdocument.selectedIndex;
+    var ezuobiao = edocument.options[exuanze].value;
     var q1zuobiao = qdocument.options[qxuanze].value;
     var q2zuobiao = qdocument.options[qxuanze].value;
+
+    ebeilv = e1[ezuobiao];
     qbeilv1 = q1[q1zuobiao];
     qbeilv2 = q2[q2zuobiao];
 }
 
 function Damage()
 {
+    var edamage_feibaoji = gongjili * 1.466 * ebeilv;
+    var edamage_baoji = gongjili * 1.466 * ebeilv * (100 + baoshang) / 100;
+
     var qdamage = gongjili * 1.466 * (baojilv * (100 + baoshang) / 100 + (1 - baojilv) * 1);
     var qdamagetotal = qdamage * qbeilv1 * 19 + qdamage * qbeilv2 * 1;
     if (qbeilv1 >= 2.12)
         qdamagetotal = qdamagetotal * 1.4;
+
+
+    edamage_feibaoji = Math.ceil(edamage_feibaoji);
+    edamage_baoji = Math.ceil(edamage_baoji);
     qdamagetotal = Math.ceil(qdamagetotal);
-    document.getElementById("shanghai").innerHTML = qdamagetotal;
+
+
+    document.getElementById("shanghai").innerHTML = "e非暴击伤害：" + edamage_feibaoji + "<br>" + 
+                                                    "e暴击伤害：" + edamage_baoji + "<br>" + 
+                                                    "大招总伤害期望：" + qdamagetotal;
 }
 
 
