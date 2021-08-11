@@ -137,15 +137,19 @@
 							攻击力：
 							<br />
 							<!-- 这里放攻击力的输入框 -->
+							<input type="text" value="" id="gongjili" />
 							<br />
 							暴击率：
 							<br />
 							<!--  这里放暴击率的输入框 -->
+							<input type="text" value="" id="baojilv" />
 							<br />
 							暴击伤害：
 							<br />
 							<!--  这里放暴伤的输入框 -->
+							<input type="text" value="" id="baoshang" />
 							<br />
+							<!-- <button onclick="getinput()">确定输入以上数据</button> -->
 						</p>
 						<h5></h5>
 					</header>
@@ -213,6 +217,8 @@
 							<option value=12>13</option>
 						</select>
 						<br />
+						<!-- <button onclick="gettianfu()">确定输入以上天赋</button> -->
+						<br />
 					</p>
 				</div>
 
@@ -237,12 +243,12 @@
 						<br />
 						<select id="weapon" style="width: 300px">
 							<option value=0 selected="selected">雾切之回光</option>
-							<option value=1>黑剑</option>
-							<option value=2>风鹰剑</option>
-							<option value=3>天目影打刀</option>
-							<option value=4>雪山薄荷</option>
-							<option value=5>卢锅巴</option>
-							<option value=6>咸鱼</option>
+							<option value=1>磐岩结绿</option>
+							<option value=2>斫峰之刃</option>
+							<option value=3>黑岩长剑</option>
+							<option value=4>黑剑</option>
+							<option value=5>天目影打刀</option>
+							<option value=6>黎明神剑</option>
 						</select>
 						<br />
 						
@@ -317,12 +323,22 @@
 					<h3>减抗 减防 增伤</h3>
 					<p>
 						<br />
+						钟离
 						
+						<select id="zhonglikaidun" style="width: 300px">
+							<option value=0>开盾</option>
+							<option value=1 selected="selected">不开盾</option>
+						</select>
+						<br />
 						
+						班尼特
+						<select id="bannitekaida" style="width: 300px">
+							<option value=0>开大</option>
+							<option value=1 selected="selected">不开大</option>
+						</select>
+						<br />
+
 					</p>
-					<!-- <form>
-						<label> 钟离开盾</label><input type="radio" name="zhonglikaidun" />
-					</form> -->
 				</div>
 
 			</section>
@@ -349,7 +365,10 @@
 					<p>
 						<br />
 						<!-- 这里放显示伤害的框 -->
+						<button onclick="getinput();gettianfu();Damage()">显示结果</button>
 						<br />
+					</p>
+					<p id = "shanghai">
 						
 					</p>
 				</div>
@@ -380,7 +399,7 @@
 	<script src="../assets/js/breakpoints.min.js"></script>
 	<script src="../assets/js/util.js"></script>
 	<script src="../assets/js/main.js"></script>
-
+	<script src="../assets/js/math.js"></script>
 	
 </body>
 </html>
