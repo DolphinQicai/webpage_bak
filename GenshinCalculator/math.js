@@ -16,16 +16,8 @@ function main()
 
 function getpersondengji()
 {
-    var dengjitext = document.getElementById("Persongrade");
-    var persondengjixuanze = dengjitext.selectedIndex;
-    var value_ = dengjitext.options[persondengjixuanze].value;
-    persondengji = 0;
-    if (value_ == 0)
-        persondengji = 70;
-    else if (value_ == 1)
-        persondengji = 80;
-    else if (value_ == 2)
-        persondengji = 90;
+    persondengji = document.getElementById("Persongrade").value;
+    persondengji = parseFloat(persondengji);
 }
 
 
