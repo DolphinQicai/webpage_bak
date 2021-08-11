@@ -6,6 +6,8 @@ function getinput()
     gongjili = parseFloat(gongjili);
     baojilv = parseFloat(baojilv);
     baoshang = parseFloat(baoshang);
+
+    baojilv = baojilv / 100;
 }
 
 var q1 = new Array()
@@ -77,6 +79,12 @@ function Damage()
 
     var qdamage = gongjili * 1.466 * (baojilv * (100 + baoshang) / 100 + (1 - baojilv) * 1);
     var qdamagetotal = qdamage * qbeilv1 * 19 + qdamage * qbeilv2 * 1;
+
+    var q1_feibaoji = gongjili * 1.466 * qbeilv1;
+    var q1_baoji = gongjili * 1.466 * qbeilv1 * (100 + baoshang) / 100;
+    var q20_feibaoji = gongjili * 1.466 * qbeilv2;
+    var q20_baoji = gongjili * 1.466 * qbeilv2 * (100 + baoshang) / 100;
+
     if (qbeilv1 >= 2.12)
         qdamagetotal = qdamagetotal * 1.4;
 
@@ -84,11 +92,22 @@ function Damage()
     edamage_feibaoji = Math.ceil(edamage_feibaoji);
     edamage_baoji = Math.ceil(edamage_baoji);
     qdamagetotal = Math.ceil(qdamagetotal);
+    q1_feibaoji = Math.ceil(q1_feibaoji);
+    q1_baoji = Math.ceil(q1_baoji);
+    q20_feibaoji = Math.ceil(q20_feibaoji);
+    q20_baoji = Math.ceil(q20_baoji);
 
-
-    document.getElementById("shanghai").innerHTML = "e非暴击伤害：" + edamage_feibaoji + "<br>" + 
-                                                    "e暴击伤害：" + edamage_baoji + "<br>" + 
-                                                    "大招总伤害期望：" + qdamagetotal;
+    document.getElementById("shanghai").innerHTML = 
+        "攻击力：" + gongjili + "<br>" + 
+        "暴击率：" + baojilv * 100 + "%" + "<br>" + 
+        "暴伤：" + baoshang + "%" + "<br>" + 
+        "e非暴击伤害：" + edamage_feibaoji + "<br>" + 
+        "e暴击伤害：" + edamage_baoji + "<br>" + 
+        "q一跳非暴击" + q1_feibaoji + "<br>" + 
+        "q一跳暴击" + q1_baoji + "<br>" + 
+        "q最终跳非暴击" + q20_feibaoji + "<br>" + 
+        "q最终跳暴击" + q20_baoji + "<br>" + 
+        "大招总伤害期望：" + qdamagetotal;
 }
 
 
