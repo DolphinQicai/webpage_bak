@@ -366,8 +366,28 @@
 					<h3>怪物抗性、防御力</h3>
 					<p>
 						<br />
-						
-						
+						怪物对应元素抗性
+						<select id="guaiwukangxing" style="width: 300px">
+							<option value=0>0抗性</option>
+							<option value=1 selected="selected">10%抗性</option>
+							<option value=2>20%抗性</option>
+							<option value=3>30%抗性</option>
+							<option value=4>40%抗性</option>
+							<option value=5>50%抗性</option>
+							<option value=6>70%抗性</option>
+							<option value=7>-20%抗性</option>
+						</select>
+						<br />
+						怪物防御（只与怪物等级、角色等级有关）
+						<select id="guaiwufangyu" style="width: 300px">
+							<option value=0 selected="selected">0防御</option>
+							<option value=1>12-1上半95级海乱鬼</option>
+							<option value=2>12-2上半98级雷丘王</option>
+							<option value=3>12-3上半100级遗迹守卫</option>
+							<option value=4>8级世界91级遗迹守卫</option>
+							<option value=5>8级世界88级丘丘人</option>
+						</select>
+						<br />
 					</p>
 					
 				</div>
@@ -384,9 +404,10 @@
 						<button onclick="main()">显示结果</button>
 						<br />
 					</p>
-					<p id = "shanghai">
-						
-					</p>
+					<p id = "zhushuxing"></p>
+					<p id = "pinga"></p>
+					<p id = "ejineng"></p>
+					<p id = "qjineng"></p>
 				</div>
 			</section>
 
