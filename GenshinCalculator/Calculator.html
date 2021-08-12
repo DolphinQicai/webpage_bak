@@ -237,18 +237,26 @@
 						<br />
 						武器选择：
 						<br />
-						<select id="weapon" style="width: 300px">
-							<option value=0 selected="selected">雾切之回光</option>
-							<option value=1>磐岩结绿</option>
-							<option value=2>斫峰之刃</option>
-							<option value=3>黑岩长剑</option>
-							<option value=4>黑剑</option>
-							<option value=5>天目影打刀</option>
-							<option value=6>黎明神剑</option>
+						<select id="weapon" style="width: 300px" onchange="return weaponchange()">
+							<option value=0 selected="selected">无</option>
+							<option value=1>雾切之回光</option>
+							<option value=2>磐岩结绿</option>
+							<option value=3>斫峰之刃</option>
+							<option value=4>黑岩长剑</option>
+							<option value=5>黑剑</option>
+							<option value=6>天目影打刀</option>
+							<option value=7>黎明神剑</option>
 						</select>
 						<br />
+						<table width="200" border="0" cellpadding="0" cellspacing="1">
+							
+							
+						</table>
+						
 						
 					</p>
+					<p id="weaponselect"></p>
+					
 				</div>
 			</section>
 
@@ -287,15 +295,17 @@
 				<div class="container">
 					<h3>精通、元素伤害</h3>
 					<p>
-						<br />
+						
 						精通：
 						<br />
-							<!-- 这里放精通的输入框 -->
+						
+						人物精通：（输入样例：900）
 						<br />
+						<input type="text" value="" id="Personjingtong" />
 						<br />
 						元素伤害：
 						<br />
-						<select id="yuansushanghai" style="width: 300px">
+						<select id="yuansushanghaibei" style="width: 300px">
 							<option value=0>水伤杯</option>
 							<option value=1 selected="selected">冰伤杯</option>
 							<option value=2>火伤杯</option>
@@ -306,7 +316,11 @@
 							
 						</select>
 						<br />
-						
+						增幅反应（蒸发、融化）
+						<select id="shifoudazengfufanying" style="width: 300px">
+							<option value=0>打增幅反应</option>
+							<option value=1 selected="selected">不打增幅反应</option>
+						</select>
 						
 					</p>
 				</div>
@@ -433,6 +447,8 @@
 	<script src="../assets/js/main.js"></script>
 	<script src="math.js"></script>
 	<script src="tianfu.js"></script>
+	<script src="weapon.js"></script>
+	<script src="print.js"></script>
 	
 </body>
 </html>

@@ -4,6 +4,12 @@ function main()
     getpersondengji();
     getinput();
     gettianfu();
+    getjingtong();
+    // shengyiwu();
+    panduanshifoudazengfufanying();
+    jisuanjingtongjiacheng();
+    yuansushanghaijiacheng_yuansushanghaibei();
+    fanyingjiacheng_jingtong();
     getzhonglidun();
     getkangxingxuanze();
     getkangxingxishu();
@@ -72,6 +78,66 @@ function gettianfu()
     qtianfu += 1;
 
 }
+
+
+function panduanshifoudazengfufanying()
+{
+    var zengfufanyingtext = document.getElementById("shifoudazengfufanying");
+    var zengfufanyingxuanze = zengfufanyingtext.selectedIndex;
+    var zengfufanyingzuobiao = zengfufanyingtext.options[zengfufanyingxuanze].value;
+    if (zengfufanyingzuobiao == 0)
+        zengfufanying = 1;
+    else
+        zengfufanying = 0;
+}
+
+function getjingtong()
+{
+    jingtong = document.getElementById("Personjingtong").value;
+    jingtong = parseFloat(jingtong);
+}
+
+
+
+function jisuanjingtongjiacheng()
+{
+    zengfujiacheng = 25 * jingtong / ((jingtong + 1400) * 9);
+    jubianjiacheng = 16 * jingtong / (jingtong + 2000);
+    jiejingjiacheng = 40 * jingtong / ((jingtong + 1400) * 9);
+}
+
+function yuansushanghaijiacheng_yuansushanghaibei()
+{
+    var beitext = document.getElementById("yuansushanghaibei");
+    var beixuanze = beitext.selectedIndex;
+    beizuobiao = beitext.options[beixuanze].value;
+    yuansushanghaijiacheng = 1;
+    wulishanghaijiacheng = 1;
+    if (beizuobiao == 0)
+        yuansushanghaijiacheng = 1;
+    else if (beizuobiao == 1)
+        yuansushanghaijiacheng = 1.466;
+    else if (beizuobiao == 2)
+        yuansushanghaijiacheng = 1;
+    else if (beizuobiao == 3)
+        yuansushanghaijiacheng = 1;
+    else if (beizuobiao == 4)
+        yuansushanghaijiacheng = 1;
+    else if (beizuobiao == 5)
+        yuansushanghaijiacheng = 1;
+    else if (beizuobiao == 6)
+        wulishanghaijiacheng = 1.583;
+}
+
+function fanyingjiacheng_jingtong()
+{
+    if (zengfufanying == 1)
+        zengfufanyingjiacheng = 1.5 + zengfujiacheng;
+    if (zengfufanying == 0)
+        zengfufanyingjiacheng = 1;
+}
+
+
 
 
 function getzhonglidun()
@@ -145,11 +211,15 @@ function getkangxingxuanze()
 
 function getkangxingxishu()
 {
-    kangxingxishu = guaiwukangxing;
+    kangxingxishu = 0;
     if (dun == 1)
-        kangxingxishu = kangxingxishu - 0.2;
-    if (kangxingxishu < 0)
-        kangxingxishu = kangxingxishu / 2;
+        guaiwukangxing = guaiwukangxing - 0.2;
+    if (guaiwukangxing < 0)
+        kangxingxishu = 1 - guaiwukangxing / 2;
+    else if (guaiwukangxing >= 0.75 )
+        kangxingxishu = 1 / (1 + 4 * guaiwukangxing);
+    else if (guaiwukangxing >= 0 && guaiwukangxing < 0.75)
+        kangxingxishu = 1 - guaiwukangxing;
 }
 
 
@@ -160,26 +230,29 @@ function Damage()
 {
     adamage_feibaoji = new Array();
     adamage_baoji = new Array();
+    if (beizuobiao == 1)
+        wulishanghaijiacheng = yuansushanghaijiacheng;
+    
     for (var i = 0; i < 6; i++)
     {
-        adamage_feibaoji[i] = gongjili * 1.466 * (1 - kangxingxishu) * (1 - fangyuxishu) * abeilv[i];
-        adamage_baoji[i] = gongjili * 1.466 * (1 - kangxingxishu) * (1 - fangyuxishu) * abeilv[i] * (100 + baoshang) / 100;
+        adamage_feibaoji[i] = gongjili * wulishanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * abeilv[i];
+        adamage_baoji[i] = gongjili * wulishanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * abeilv[i] * (100 + baoshang) / 100;
         adamage_feibaoji[i] = Math.ceil(adamage_feibaoji[i]);
         adamage_baoji[i] = Math.ceil(adamage_baoji[i]);
     }
 
 
 
-    edamage_feibaoji = gongjili * 1.466 * (1 - kangxingxishu) * (1 - fangyuxishu) * ebeilv;
-    edamage_baoji = gongjili * 1.466 * (1 - kangxingxishu) * (1 - fangyuxishu) * ebeilv * (100 + baoshang) / 100;
+    edamage_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * ebeilv;
+    edamage_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * ebeilv * (100 + baoshang) / 100;
 
-    qdamage = gongjili * 1.466 * (1 - kangxingxishu) * (1 - fangyuxishu) * (baojilv * (100 + baoshang) / 100 + (1 - baojilv) * 1);
+    qdamage = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * (baojilv * (100 + baoshang) / 100 + (1 - baojilv) * 1);
     qdamagetotal = qdamage * qbeilv1 * 19 + qdamage * qbeilv2 * 1;
 
-    q1_feibaoji = gongjili * 1.466 * (1 - kangxingxishu) * (1 - fangyuxishu) * qbeilv1;
-    q1_baoji = gongjili * 1.466 * (1 - kangxingxishu) * (1 - fangyuxishu) * qbeilv1 * (100 + baoshang) / 100;
-    q20_feibaoji = gongjili * 1.466 * (1 - kangxingxishu) * (1 - fangyuxishu) * qbeilv2;
-    q20_baoji = gongjili * 1.466 * (1 - kangxingxishu) * (1 - fangyuxishu) * qbeilv2 * (100 + baoshang) / 100;
+    q1_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * qbeilv1;
+    q1_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * qbeilv1 * (100 + baoshang) / 100;
+    q20_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * qbeilv2;
+    q20_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * qbeilv2 * (100 + baoshang) / 100;
 
     if (qbeilv1 >= 2.12)
         qdamagetotal = qdamagetotal * 1.4;
@@ -196,61 +269,3 @@ function Damage()
     
 }
 
-
-// 输出伤害和相关说明
-function print()
-{
-    baojilv = baojilv * 100;
-    baojilv = baojilv.toFixed(1);
-    baoshang = baoshang.toFixed(1);
-    document.getElementById("zhushuxing").innerHTML = 
-        "基础数值：" + "<br>" + 
-        "神里绫华" + "<br>" + 
-        "等级：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + persondengji + "<br>" + 
-        "攻击力：" + gongjili + "<br>" + 
-        "暴击率：" + baojilv + "%" + "<br>" + 
-        "暴伤：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + baoshang + "%" + "<br>" + 
-        "天赋等级：" + atianfu + "&nbsp;&nbsp;&nbsp;&nbsp;" + etianfu + "&nbsp;&nbsp;&nbsp;&nbsp;" + qtianfu + "&nbsp;&nbsp;&nbsp;&nbsp;" + "<br>";
-    document.getElementById("pinga").innerHTML = 
-        "平a：" + "<br>" + 
-        "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "非暴击" + 
-        "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "暴击" + "<br>";
-    
-    for (var i = 1; i < 7; i++)
-    {
-        if (i == 4)
-        {
-            document.getElementById("pinga").innerHTML += 
-                "第" + i + "段：" + adamage_feibaoji[i-1] + " * 3" + 
-                "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;&nbsp;&nbsp;" + 
-                adamage_baoji[i-1] + " * 3" + "<br>";
-        }
-        else if (i == 6)
-        {
-            document.getElementById("pinga").innerHTML += 
-                "重击：&nbsp;&nbsp;&nbsp;" + adamage_feibaoji[i-1] + " * 3" + 
-                "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;" + 
-                adamage_baoji[i-1] + " * 3" + "<br>";
-        }
-        else
-        {
-            document.getElementById("pinga").innerHTML += 
-                "第" + i + "段：" + adamage_feibaoji[i-1] + 
-                "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + 
-                adamage_baoji[i-1] + "<br>";
-        }
-    }
-        
-    document.getElementById("ejineng").innerHTML = 
-        "E技能：" + "<br>" + 
-        "非暴击伤害：" + edamage_feibaoji + "<br>" + 
-        "暴击伤害：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + edamage_baoji + "<br>";
-    document.getElementById("qjineng").innerHTML = 
-        "Q技能：" + "<br>" + 
-        "一跳非暴击：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + q1_feibaoji + "<br>" + 
-        "一跳暴击：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + q1_baoji + "<br>" + 
-        "最终跳非暴击：" + q20_feibaoji + "<br>" + 
-        "最终跳暴击：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + q20_baoji + "<br>" + 
-        "<br>" + 
-        "大招总伤害期望：" + qdamagetotal;
-}
