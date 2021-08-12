@@ -6,9 +6,12 @@ function main()
     gettianfu();
     getjingtong();
     // shengyiwu();
+    weaponjiacheng();
     panduanshifoudazengfufanying();
     jisuanjingtongjiacheng();
     yuansushanghaijiacheng_yuansushanghaibei();
+    yuansushanghaijiacheng_weapon();
+    yuansujiacheng();
     fanyingjiacheng_jingtong();
     getzhonglidun();
     getkangxingxuanze();
@@ -116,7 +119,7 @@ function yuansushanghaijiacheng_yuansushanghaibei()
     if (beizuobiao == 0)
         yuansushanghaijiacheng = 1;
     else if (beizuobiao == 1)
-        yuansushanghaijiacheng = 1.466;
+        yuansushanghaijiacheng = 1.466; //雾切 雾切 冲刺冰伤 二冰套
     else if (beizuobiao == 2)
         yuansushanghaijiacheng = 1;
     else if (beizuobiao == 3)
@@ -128,6 +131,13 @@ function yuansushanghaijiacheng_yuansushanghaibei()
     else if (beizuobiao == 6)
         wulishanghaijiacheng = 1.583;
 }
+
+
+function yuansujiacheng()
+{
+    yuansushanghaijiacheng = yuansushanghaijiacheng + weaponyuansushanghaijiacheng;
+}
+
 
 function fanyingjiacheng_jingtong()
 {

@@ -7,10 +7,13 @@ function weaponchange()
     
     if (weapon == 0)
     {
+        document.getElementById("wuqie").style.display = "none";
         document.getElementById("weaponselect").innerHTML = "";
+
     }
     if (weapon == 1)
     {
+        document.getElementById("wuqie").style.display = "block";
         document.getElementById("weaponselect").innerHTML = 
         "雾切之回光" + "<br>" + "<br>" + "90级基础攻击力：674" + "<br>" + "暴击伤害44.1%" + "<br>" + "<br>" + 
         "精炼(1/2/3/4/5)阶" + "<br>" + 
@@ -26,6 +29,7 @@ function weaponchange()
     }
     if (weapon == 2)
     {
+        document.getElementById("wuqie").style.display = "none";
         document.getElementById("weaponselect").innerHTML = 
         "磐岩结绿" + "<br>" + "<br>" + "90级基础攻击力：542" + "<br>" + "暴击率44.1%" + "<br>" + "<br>" + 
         "精炼(1/2/3/4/5)阶" + "<br>" + 
@@ -34,6 +38,7 @@ function weaponchange()
     }
     if (weapon == 3)
     {
+        document.getElementById("wuqie").style.display = "none";
         document.getElementById("weaponselect").innerHTML = 
         "斫峰之刃" + "<br>" + "<br>" + "90级基础攻击力：608" + "<br>" + "攻击力：49.6%" + "<br>" + "<br>" + 
         "精炼(1/2/3/4/5)阶" + "<br>" + 
@@ -43,6 +48,7 @@ function weaponchange()
     }
     if (weapon == 4)
     {
+        document.getElementById("wuqie").style.display = "none";
         document.getElementById("weaponselect").innerHTML = 
         "黑岩长剑" + "<br>" + "<br>" + "90级基础攻击力：565" + "<br>" + "暴击伤害：36.8%" + "<br>" + "<br>" +
         "精炼(1/2/3/4/5)阶" + "<br>" + 
@@ -52,6 +58,7 @@ function weaponchange()
     }
     if (weapon == 5)
     {
+        document.getElementById("wuqie").style.display = "none";
         document.getElementById("weaponselect").innerHTML = 
         "黑剑" + "<br>" + "<br>" + "90级基础攻击力：510" + "<br>" + "暴击率：27.6%" + "<br>" + "<br>" + 
         "精炼(1/2/3/4/5)阶" + "<br>" + 
@@ -60,6 +67,7 @@ function weaponchange()
     }
     if (weapon == 6)
     {
+        document.getElementById("wuqie").style.display = "none";
         document.getElementById("weaponselect").innerHTML = 
         "天目影打刀" + "<br>" + "<br>" + "90级基础攻击力：454" + "<br>" + "攻击力：55.1%" + "<br>" + "<br>" +
         "精炼(1/2/3/4/5)阶" + "<br>" + 
@@ -69,10 +77,54 @@ function weaponchange()
     }
     if (weapon == 7)
     {
+        document.getElementById("wuqie").style.display = "none";
         document.getElementById("weaponselect").innerHTML = 
         "黎明神剑" + "<br>" + "<br>" + "90级基础攻击力：401" + "<br>" + "暴击伤害：46.9%" + "<br>" + "<br>" + 
         "精炼(1/2/3/4/5)阶" + "<br>" + 
         "激励" + "<br>" + 
         " · 生命值高于90%时，暴击率提升(14%/17.5%/21%/24.5%/28%)。"
     }
+}
+
+
+function weaponjiacheng()
+{
+    var weapondocument = document.getElementById("weapon");
+    var weaponxuanze = weapondocument.selectedIndex;
+    var weaponzuobiao = weapondocument.options[weaponxuanze].value;
+    weapon = weaponzuobiao;
+    wuqijiacheng = 0;
+    if (weapon == 0)
+        wuqijiacheng = 0;
+    if (weapon == 1)
+    {
+        var wuqiedocument = document.getElementById("wuqie");
+        var wuqiexuanze = wuqiedocument.selectedIndex;
+        var wuqiezuobiao = wuqiedocument.options[wuqiexuanze].value;
+        if (wuqiezuobiao == 0)
+            wuqiejiacheng = 0.12;
+        else if (wuqiezuobiao == 1)
+            wuqiejiacheng = 0.12 + 0.08;
+        else if (wuqiezuobiao == 2)
+            wuqiejiacheng = 0.12 + 0.16;
+        else if (wuqiezuobiao == 3)
+            wuqiejiacheng = 0.12 + 0.28;
+
+
+    }
+    
+}
+
+
+function yuansushanghaijiacheng_weapon()
+{
+    if (weapon == 0)
+    {
+        weaponyuansushanghaijiacheng = wuqijiacheng;
+    }
+    if (weapon == 1)
+    {
+        weaponyuansushanghaijiacheng = wuqiejiacheng;
+    }
+    
 }
