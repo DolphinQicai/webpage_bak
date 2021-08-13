@@ -5,19 +5,36 @@ function main()
     getinput();
     gettianfu();
     getjingtong();
-    // shengyiwu();
-    weaponjiacheng();
-    panduanshifoudazengfufanying();
-    jisuanjingtongjiacheng();
-    yuansushanghaijiacheng_yuansushanghaibei();
-    yuansushanghaijiacheng_weapon();
-    yuansujiacheng();
-    fanyingjiacheng_jingtong();
+
+    weaponjiacheng();                  //武器加成
+
+    shengyiwuxuanze();                  //选择圣遗物套装
+
+    shengyiwujiacheng();               //圣遗物加成（非元素伤害）
+
+    panduanshifoudazengfufanying();      //判断是否打增幅反应
+
+    jisuanjingtongjiacheng();         //精通值计算函数y=f(x)
+
+    yuansushanghaijiacheng_yuansushanghaibei(); //圣遗物杯的元素伤害加成
+
+    yuansushanghaijiacheng_weapon();     //武器的元素伤害加成
+
+    yuansujiacheng_shengyiwu();
+
+    yuansujiacheng();                    //元素增伤乘区
+
+    bannite_zengshang();                 //班尼特增伤
+
+    fanyingjiacheng_jingtong();         //精通、增幅反应乘区
+
     getzhonglidun();
     getkangxingxuanze();
-    getkangxingxishu();
+    getkangxingxishu();                  //元素抗性乘区
+
     getfangyuxuanze();
-    getfangyuxishu();
+    getfangyuxishu();                    //怪物防御乘区（等级压制）
+
     Damage();
     print();
 }
@@ -62,11 +79,11 @@ function gettianfu()
 
     abeilv = new Array();
     for (var i = 0; i < 6; i++)
-        abeilv[i] = pinga[i][azuobiao];
+        abeilv[i] = shenli_pinga[i][azuobiao];
 
-    ebeilv = e1[ezuobiao];
-    qbeilv1 = q1[q1zuobiao];
-    qbeilv2 = q2[q2zuobiao];
+    ebeilv = shenli_e1[ezuobiao];
+    qbeilv1 = shenli_q1[q1zuobiao];
+    qbeilv2 = shenli_q2[q2zuobiao];
 
     atianfu = adocument.options[axuanze].value;
     etianfu = edocument.options[exuanze].value;
@@ -135,7 +152,7 @@ function yuansushanghaijiacheng_yuansushanghaibei()
 
 function yuansujiacheng()
 {
-    yuansushanghaijiacheng = yuansushanghaijiacheng + weaponyuansushanghaijiacheng;
+    yuansushanghaijiacheng = yuansushanghaijiacheng + weaponyuansushanghaijiacheng + shengyiwuyuansushanghaijiacheng;
 }
 
 
@@ -146,6 +163,7 @@ function fanyingjiacheng_jingtong()
     if (zengfufanying == 0)
         zengfufanyingjiacheng = 1;
 }
+
 
 
 
@@ -240,13 +258,17 @@ function Damage()
 {
     adamage_feibaoji = new Array();
     adamage_baoji = new Array();
+    
+    if (baojilv > 1)
+        baojilv = 1;
+
     if (beizuobiao == 1)
         wulishanghaijiacheng = yuansushanghaijiacheng;
     
     for (var i = 0; i < 6; i++)
     {
-        adamage_feibaoji[i] = gongjili * wulishanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * abeilv[i];
-        adamage_baoji[i] = gongjili * wulishanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * abeilv[i] * (100 + baoshang) / 100;
+        adamage_feibaoji[i] = gongjili * wulishanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_pinga_jiacheng * (1 - fangyuxishu) * abeilv[i];
+        adamage_baoji[i] = gongjili * wulishanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_pinga_jiacheng * (1 - fangyuxishu) * abeilv[i] * (100 + baoshang) / 100;
         adamage_feibaoji[i] = Math.ceil(adamage_feibaoji[i]);
         adamage_baoji[i] = Math.ceil(adamage_baoji[i]);
     }
@@ -256,18 +278,18 @@ function Damage()
     edamage_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * ebeilv;
     edamage_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * ebeilv * (100 + baoshang) / 100;
 
-    qdamage = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * (baojilv * (100 + baoshang) / 100 + (1 - baojilv) * 1);
+    qdamage = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * (1 - fangyuxishu) * (baojilv * (100 + baoshang) / 100 + (1 - baojilv) * 1);
     qdamagetotal = qdamage * qbeilv1 * 19 + qdamage * qbeilv2 * 1;
 
-    q1_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * qbeilv1;
-    q1_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * qbeilv1 * (100 + baoshang) / 100;
-    q20_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * qbeilv2;
-    q20_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * qbeilv2 * (100 + baoshang) / 100;
+    q1_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * (1 - fangyuxishu) * qbeilv1;
+    q1_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * (1 - fangyuxishu) * qbeilv1 * (100 + baoshang) / 100;
+    q20_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * (1 - fangyuxishu) * qbeilv2;
+    q20_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * (1 - fangyuxishu) * qbeilv2 * (100 + baoshang) / 100;
 
     if (qbeilv1 >= 2.12)
         qdamagetotal = qdamagetotal * 1.4;
 
-
+    gongjili = Math.ceil(gongjili);
     edamage_feibaoji = Math.ceil(edamage_feibaoji);
     edamage_baoji = Math.ceil(edamage_baoji);
     qdamagetotal = Math.ceil(qdamagetotal);

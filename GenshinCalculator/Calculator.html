@@ -103,7 +103,15 @@
 						<p>
 							目前只有神里，而且后面的功能不是很完善
 						</p>
-						<h5>之后会持续更新（大概</h5>
+						<h4>（伤害独立乘区没做）</h4>
+						<p>
+							<br />
+							<br />
+							每个选项一定要选准，建议边开游戏边选，数据一定要准确无误，否则最终伤害与真实伤害相差会非常大
+							<br />
+							<br />
+							如果每个选项都选择正确，计算所得伤害与真实伤害误差会在2%以内
+						</p>
 					</header>
 					<p>
 						<br />
@@ -116,7 +124,7 @@
 						<br />
 						人物等级：（输入样例：90）
 						<br />
-						<input type="text" value="" id="Persongrade" />
+						<input type="text" value="" id="Persongrade" style="width: 300px;"/>
 						<br />
 					</p>
 				</div>
@@ -133,19 +141,19 @@
 							攻击力：（输入样例：2200）
 							<br />
 							<!-- 这里放攻击力的输入框 -->
-							<input type="text" value="" id="gongjili" />
+							<input type="text" value="" id="gongjili" style="width: 300px;"/>
 							<br />
 							暴击率：（输入样例：30）
 							<br />
 							<!--  这里放暴击率的输入框 -->
-							<input type="text" value="" id="baojilv" />
+							<input type="text" value="" id="baojilv" style="width: 300px;"/>
 							<br />
 							暴击伤害：（输入样例：280）
 							<br />
 							<!--  这里放暴伤的输入框 -->
-							<input type="text" value="" id="baoshang" />
+							<input type="text" value="" id="baoshang" style="width: 300px;"/>
 							<br />
-							<!-- <button onclick="getinput()">确定输入以上数据</button> -->
+							
 						</p>
 						<h5></h5>
 					</header>
@@ -213,7 +221,7 @@
 							<option value=12>13</option>
 						</select>
 						<br />
-						<!-- <button onclick="gettianfu()">确定输入以上天赋</button> -->
+						
 						<br />
 					</p>
 				</div>
@@ -248,7 +256,7 @@
 							<option value=7>黎明神剑</option>
 						</select>
 						<br />
-						<select id="wuqie" style="display: none;">
+						<select id="wuqie" style="display: none; width: 300px;">
 							<option value=0 selected="selected">0层雾切之巴印</option>
 							<option value=1>1层雾切之巴印</option>
 							<option value=2>2层雾切之巴印</option>
@@ -270,21 +278,31 @@
 						<br />
 						
 						<br />
-						<select id="圣遗物" style="width: 300px">
-							<option value=0 selected="selected">四冰套</option>
-							<option value=1>四绝缘</option>
-							<option value=2>四角斗</option>
-							<option value=3>四宗室</option>
-							<option value=4>四乐团</option>
-							<option value=5>二冰二绝缘</option>
-							<option value=6>二冰二角斗</option>
-							<option value=7>二冰二宗室</option>
-							<option value=8>二冰二乐团</option>
+						<select id="shengyiwu_" style="width: 300px" onchange="return shengyiwuchange();">
+							<option value=0 selected="selected">无</option>
+							<option value=1>四冰套</option>
+							<option value=2>四绝缘</option>
+							<option value=3>四角斗</option>
+							<option value=4>四宗室</option>
+							<option value=5>四乐团</option>
+							<option value=6>二冰二绝缘</option>
+							<option value=7>二冰二角斗</option>
+							<option value=8>二冰二宗室</option>
+							<option value=9>二冰二乐团</option>
 						</select>
 						<br />
-						
-						
+						<select id="sibingtao" style="display: none; width: 300px;">
+							<option value=0 selected="selected">不上冰</option>
+							<option value=1>上冰（+20%暴击率）</option>
+							<option value=2>冻结（+40%暴击率）</option>
+						</select>
 					</p>
+					<p id="chongnengkuang" style="display: none;">
+						人物元素充能效率：（输入样例200）
+						<br />
+						<input type="text" value="" id="chongneng" style="width: 300px;"/>
+					</p>
+					<p id="shengyiwuselect"></p>
 				</div>
 
 			</section>
@@ -303,7 +321,7 @@
 						
 						人物精通：（输入样例：900）
 						<br />
-						<input type="text" value="" id="Personjingtong" />
+						<input type="text" value="" id="Personjingtong" style="width: 300px;"/>
 						<br />
 						元素伤害：
 						<br />
@@ -344,12 +362,47 @@
 						<br />
 						
 						班尼特
-						<select id="bannitekaida" style="width: 300px">
+						<select id="bannitekaida" style="width: 300px" onchange="return bannite()">
 							<option value=0>开大</option>
 							<option value=1 selected="selected">不开大</option>
 						</select>
+						
+					</p>
+					<p id="banniteshuju" style="display: none;">
+						班尼特攻击力白值：（输入样例900）
 						<br />
-
+						<input type="text" value="" id="bannitegongjili_baizhi"  style="width: 300px;"/>
+						<br />
+						神里攻击力白值：（输入样例900）
+						<br />
+						<input type="text" value="" id="shenligongjili_baizhi"  style="width: 300px;"/>
+						<br />
+						班尼特命座与圣遗物：
+						<br />
+						<select id="bannite_shengyiwu_mingzuo" style="width: 500px">
+							<option value=0>0命，圣遗物非四千岩且非四宗室</option>
+							<option value=1>0命，圣遗物四千岩或者四宗室</option>
+							<option value=2>1命及以上，圣遗物非四千岩且非四宗室</option>
+							<option value=3>1命及以上，圣遗物四千岩或者四宗室</option>
+							
+						</select>
+						<br />
+						班尼特大招天赋：
+						<select id="bannitedazhaodengji" style="width: 300px">
+							<option value=0>1</option>
+							<option value=1>2</option>
+							<option value=2>3</option>
+							<option value=3>4</option>
+							<option value=4>5</option>
+							<option value=5>6</option>			
+							<option value=6>7</option>
+							<option value=7 selected="selected">8</option>
+							<option value=8>9</option>
+							<option value=9>10</option>
+							<option value=10>11</option>
+							<option value=11>12</option>
+							<option value=12>13</option>
+						</select>
 					</p>
 				</div>
 
@@ -451,6 +504,7 @@
 	<script src="tianfu.js"></script>
 	<script src="weapon.js"></script>
 	<script src="print.js"></script>
-	
+	<script src="shengyiwu.js"></script>
+	<script src="zengshang.js"></script>
 </body>
 </html>
