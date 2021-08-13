@@ -122,9 +122,11 @@ function yuansushanghaijiacheng_weapon()
     {
         weaponyuansushanghaijiacheng = wuqijiacheng;
     }
-    if (weapon == 1)
+    else if (weapon == 1)
     {
         weaponyuansushanghaijiacheng = wuqiejiacheng;
     }
+    else
+        weaponyuansushanghaijiacheng = 0;
     
 }
