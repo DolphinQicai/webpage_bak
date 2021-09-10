@@ -30,7 +30,7 @@ function shengyiwuchange()
     if (shengyiwuzuobiao == 2)
     {
         document.getElementById("sibingtao").style.display = "none";
-        document.getElementById("chongnengkuang").style.display = "block";
+        document.getElementById("chongnengkuang").style.display = "none";
         document.getElementById("shengyiwuselect").innerHTML =
         "两件套：" + "<br>" + 
         "元素充能效率提高20%。" + "<br>" + "<br>" + 
@@ -114,30 +114,36 @@ function shengyiwuchange()
 function yuansujiacheng_shengyiwu()
 {
     shengyiwuyuansushanghaijiacheng = 0;
-    if (shengyiwuzuobiao == 0)
+
+    if (person == 0)
     {
-        shengyiwuyuansushanghaijiacheng = 0;
+        if (shengyiwuzuobiao == 0)
+        {
+            shengyiwuyuansushanghaijiacheng = 0;
+        }
+        if (shengyiwuzuobiao == 1)
+        {
+            shengyiwuyuansushanghaijiacheng = 0.15;
+        }
+        if (shengyiwuzuobiao == 6)
+        {
+            shengyiwuyuansushanghaijiacheng = 0.15;
+        }
+        if (shengyiwuzuobiao == 7)
+        {
+            shengyiwuyuansushanghaijiacheng = 0.15;
+        }
+        if (shengyiwuzuobiao == 8)
+        {
+            shengyiwuyuansushanghaijiacheng = 0.15;
+        }
+        if (shengyiwuzuobiao == 9)
+        {
+            shengyiwuyuansushanghaijiacheng = 0.15;
+        }
     }
-    if (shengyiwuzuobiao == 1)
-    {
-        shengyiwuyuansushanghaijiacheng = 0.15;
-    }
-    if (shengyiwuzuobiao == 6)
-    {
-        shengyiwuyuansushanghaijiacheng = 0.15;
-    }
-    if (shengyiwuzuobiao == 7)
-    {
-        shengyiwuyuansushanghaijiacheng = 0.15;
-    }
-    if (shengyiwuzuobiao == 8)
-    {
-        shengyiwuyuansushanghaijiacheng = 0.15;
-    }
-    if (shengyiwuzuobiao == 9)
-    {
-        shengyiwuyuansushanghaijiacheng = 0.15;
-    }
+
+
 }
 
 
@@ -145,34 +151,40 @@ function shengyiwujiacheng()
 {
     shengyiwu_chengqu_dazhao_jiacheng = 1;
     shengyiwu_chengqu_pinga_jiacheng = 1;
-    if (shengyiwuzuobiao == 1)
+
+    if (person == 0)
     {
-        var sibingtaotext = document.getElementById("sibingtao");
-        var sibingtaoxuanze = sibingtaotext.selectedIndex;
-        var sibingtaozuobiao = sibingtaotext.options[sibingtaoxuanze].value;
-        if (sibingtaozuobiao == 1)
-            baojilv = baojilv + 0.2;
-        else if (sibingtaozuobiao == 2)
-            baojilv = baojilv + 0.4;
+        if (shengyiwuzuobiao == 1)
+        {
+            var sibingtaotext = document.getElementById("sibingtao");
+            var sibingtaoxuanze = sibingtaotext.selectedIndex;
+            var sibingtaozuobiao = sibingtaotext.options[sibingtaoxuanze].value;
+            if (sibingtaozuobiao == 1)
+                baojilv = baojilv + 0.2;
+            else if (sibingtaozuobiao == 2)
+                baojilv = baojilv + 0.4;
+        }
+        if (shengyiwuzuobiao == 2)
+        {
+            // chongneng = document.getElementById("chongneng").value;
+            // chongneng = parseFloat(chongneng);
+            shengyiwu_chengqu_dazhao_jiacheng = chongneng * 0.01 * 0.25 + 1;
+            if (shengyiwu_chengqu_dazhao_jiacheng > 1.75)
+                shengyiwu_chengqu_dazhao_jiacheng = 1.75;
+        }
+        if (shengyiwuzuobiao == 3)
+        {
+            shengyiwu_chengqu_pinga_jiacheng = 1.35;
+        }
+        if (shengyiwuzuobiao == 4)
+        {
+            shengyiwu_chengqu_dazhao_jiacheng = 1.2;
+        }
+        if (shengyiwuzuobiao == 8)
+        {
+            shengyiwu_chengqu_dazhao_jiacheng = 1.2;
+        }
     }
-    if (shengyiwuzuobiao == 2)
-    {
-        chongneng = document.getElementById("chongneng").value;
-        chongneng = parseFloat(chongneng);
-        shengyiwu_chengqu_dazhao_jiacheng = chongneng * 0.01 * 0.25 + 1;
-        if (shengyiwu_chengqu_dazhao_jiacheng > 1.75)
-            shengyiwu_chengqu_dazhao_jiacheng = 1.75;
-    }
-    if (shengyiwuzuobiao == 3)
-    {
-        shengyiwu_chengqu_pinga_jiacheng = 1.35;
-    }
-    if (shengyiwuzuobiao == 4)
-    {
-        shengyiwu_chengqu_dazhao_jiacheng = 1.2;
-    }
-    if (shengyiwuzuobiao == 8)
-    {
-        shengyiwu_chengqu_dazhao_jiacheng = 1.2;
-    }
+
+    
 }

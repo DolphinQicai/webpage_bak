@@ -50,7 +50,7 @@
     <link rel='stylesheet' href='../assets/css/main.css'>
     <script></script>
 </head>
-<body>
+<body onload="settings()">
     <!-- Header -->
 	<section id="header">
 		<header>
@@ -64,15 +64,16 @@
 			<ul>
 				<li><a href="#one" class="active">人物选择</a></li>
 				<li><a href="#two">攻击力 暴击率 暴击伤害</a></li>
-				<li><a href="#three">天赋等级</a></li>
-				<li><a href="#four">武器选择</a></li>
-				<li><a href="#five">圣遗物选择</a></li>
+				<li><a href="#three">精通 充能</a></li>
+				<li><a href="#four">天赋等级</a></li>
+				<li><a href="#five">武器选择</a></li>
+				<li><a href="#six">圣遗物选择</a></li>
 				
-				<li><a href="#six">精通、元素伤害</a></li>
-				<li><a href="#seven">减抗 减防 增伤</a></li>
-				<li><a href="#eight">伤害独立乘区</a></li>
-				<li><a href="#nine">怪物抗性、防御力</a></li>
-				<li><a href="#ten">最终总伤害</a></li>
+				<li><a href="#seven">元素伤害</a></li>
+				<li><a href="#eight">减抗 减防 增伤</a></li>
+				<li><a href="#nine">伤害独立乘区</a></li>
+				<li><a href="#ten">怪物抗性、防御力</a></li>
+				<li><a href="#eleven">最终总伤害</a></li>
 				
 			</ul>
 		</nav>
@@ -114,17 +115,18 @@
 						</p>
 					</header>
 					<p>
+						
 						<br />
 						人物选择：
 						<br />
-						<select id="Person" style="width: 300px">
+						<select id="Person" style="width: 300px" onchange="return personchange();">
 							<option value=0>神里绫华</option>
-										
+							<option value=1 selected="selected">雷电将军</option>
 						</select>
 						<br />
 						人物等级：（输入样例：90）
 						<br />
-						<input type="text" value="" id="Persongrade" style="width: 300px;"/>
+						<input type="text" value="90" id="Persongrade" style="width: 300px;"/>
 						<br />
 					</p>
 				</div>
@@ -141,19 +143,36 @@
 							攻击力：（输入样例：2200）
 							<br />
 							<!-- 这里放攻击力的输入框 -->
-							<input type="text" value="" id="gongjili" style="width: 300px;"/>
+							<input type="text" value="2541" id="gongjili" style="width: 300px;"/>
 							<br />
 							暴击率：（输入样例：30）
 							<br />
 							<!--  这里放暴击率的输入框 -->
-							<input type="text" value="" id="baojilv" style="width: 300px;"/>
+							<input type="text" value="35.3" id="baojilv" style="width: 300px;"/>
 							<br />
 							暴击伤害：（输入样例：280）
 							<br />
 							<!--  这里放暴伤的输入框 -->
-							<input type="text" value="" id="baoshang" style="width: 300px;"/>
+							<input type="text" value="126.2" id="baoshang" style="width: 300px;"/>
 							<br />
 							
+						</p>
+
+						<p id="yuanli" style="display: block;">
+							愿力层数：（大于等于0，小于等于60，可以是小数）
+							<br />
+							<input type="text" value="0" id="yuanlicengshu" style="width: 300px;"/>
+							<br />
+							雷神攻击力白值：
+							<br />
+							<input type="text" value="936" id="leishenbaizhi" style="width: 300px;"/>
+							<br />
+							大招是否开e：
+							<br />
+							<select id="leishenkaie" style="width: 300px;">
+								<option value=0>不开</option>
+								<option value=1 selected="selected">开</option>
+							</select>
 						</p>
 						<h5></h5>
 					</header>
@@ -165,6 +184,31 @@
 
 			<!-- three -->
 			<section id="three">
+				
+				<div class="container">
+					<header class="major">
+						<h3>精通 充能</h3>
+						<p>
+							<br />
+							人物精通：（输入样例：900）
+							<br />
+							<input type="text" value="58" id="Personjingtong" style="width: 300px;"/>
+							<br />
+							充能效率：（输入样例：300）
+							<input type="text" value="281.8" id="Personchongneng" style="width: 300px;"/>
+							<br />
+							
+						</p>
+						<h5></h5>
+					</header>
+					<p>
+						
+					</p>
+				</div>
+			</section>
+
+			<!-- four -->
+			<section id="four">
 				<div class="container">
 					<h3>天赋等级</h3>
 					<p>
@@ -172,14 +216,14 @@
 						平a等级：
 						<br />
 						<select id="pingatianfudengji" style="width: 300px">
-							<option value=0>1</option>
+							<option value=0 selected="selected">1</option>
 							<option value=1>2</option>
 							<option value=2>3</option>
 							<option value=3>4</option>
 							<option value=4>5</option>
 							<option value=5>6</option>			
 							<option value=6>7</option>
-							<option value=7 selected="selected">8</option>
+							<option value=7>8</option>
 							<option value=8>9</option>
 							<option value=9>10</option>
 							<option value=10>11</option>
@@ -193,9 +237,9 @@
 							<option value=2>3</option>
 							<option value=3>4</option>
 							<option value=4>5</option>
-							<option value=5>6</option>			
+							<option value=5 selected="selected">6</option>			
 							<option value=6>7</option>
-							<option value=7 selected="selected">8</option>
+							<option value=7>8</option>
 							<option value=8>9</option>
 							<option value=9>10</option>
 							<option value=10>11</option>
@@ -213,8 +257,8 @@
 							<option value=4>5</option>
 							<option value=5>6</option>			
 							<option value=6>7</option>
-							<option value=7 selected="selected">8</option>
-							<option value=8>9</option>
+							<option value=7>8</option>
+							<option value=8 selected="selected">9</option>
 							<option value=9>10</option>
 							<option value=10>11</option>
 							<option value=11>12</option>
@@ -228,8 +272,8 @@
 
 			</section>
 
-			<!-- four -->
-			<section id="four">
+			<!-- five -->
+			<section id="five">
 				<div class="container">
 					<h3>武器选择</h3>
 					<p>
@@ -243,9 +287,11 @@
 							
 						</select>
 						<br />
+					</p>
+					<p>
 						武器选择：
-						<br />
-						<select id="weapon" style="width: 300px" onchange="return weaponchange();">
+						
+						<select id="danshoujian" style="width: 300px; display: none;" onchange="return danshoujianchange();">
 							<option value=0 selected="selected">无</option>
 							<option value=1>雾切之回光</option>
 							<option value=2>磐岩结绿</option>
@@ -254,6 +300,11 @@
 							<option value=5>黑剑</option>
 							<option value=6>天目影打刀</option>
 							<option value=7>黎明神剑</option>
+						</select>
+						<br />
+						<select id="changbingwuqi" style="width: 300px; display: block;" onchange="return changbingwuqichange();">
+							<option value=0>无</option>
+							<option value=8 selected="selected">薙草之稻光</option>
 						</select>
 						<br />
 						<select id="wuqie" style="display: none; width: 300px;">
@@ -270,8 +321,8 @@
 				</div>
 			</section>
 
-			<!-- five -->
-			<section id="five">
+			<!-- six -->
+			<section id="six">
 				<div class="container">
 					<h3>圣遗物选择</h3>
 					<p>
@@ -279,9 +330,9 @@
 						
 						<br />
 						<select id="shengyiwu_" style="width: 300px" onchange="return shengyiwuchange();">
-							<option value=0 selected="selected">无</option>
+							<option value=0>无</option>
 							<option value=1>四冰套</option>
-							<option value=2>四绝缘</option>
+							<option value=2 selected="selected">四绝缘</option>
 							<option value=3>四角斗</option>
 							<option value=4>四宗室</option>
 							<option value=5>四乐团</option>
@@ -310,29 +361,24 @@
 
 			
 
-			<!-- six -->
-			<section id="six">
+			<!-- seven -->
+			<section id="seven">
 				<div class="container">
-					<h3>精通、元素伤害</h3>
+					<h3>元素伤害</h3>
 					<p>
 						
-						精通：
-						<br />
 						
-						人物精通：（输入样例：900）
-						<br />
-						<input type="text" value="" id="Personjingtong" style="width: 300px;"/>
-						<br />
 						元素伤害：
 						<br />
 						<select id="yuansushanghaibei" style="width: 300px">
 							<option value=0>水伤杯</option>
-							<option value=1 selected="selected">冰伤杯</option>
+							<option value=1>冰伤杯</option>
 							<option value=2>火伤杯</option>
 							<option value=3>雷伤杯</option>
 							<option value=4>风伤杯</option>
 							<option value=5>岩伤杯</option>
 							<option value=6>物伤杯</option>
+							<option value=7 selected="selected">无</option>
 							
 						</select>
 						<br />
@@ -347,8 +393,8 @@
 
 			</section>
 
-			<!-- seven -->
-			<section id="seven">
+			<!-- eight -->
+			<section id="eight">
 				<div class="container">
 					<h3>减抗 减防 增伤</h3>
 					<p>
@@ -371,11 +417,11 @@
 					<p id="banniteshuju" style="display: none;">
 						班尼特攻击力白值：（输入样例900）
 						<br />
-						<input type="text" value="" id="bannitegongjili_baizhi"  style="width: 300px;"/>
+						<input type="text" value="701" id="bannitegongjili_baizhi"  style="width: 300px;"/>
 						<br />
-						神里攻击力白值：（输入样例900）
+						角色攻击力白值：（输入样例900）
 						<br />
-						<input type="text" value="" id="shenligongjili_baizhi"  style="width: 300px;"/>
+						<input type="text" value="" id="juesegongjili_baizhi"  style="width: 300px;"/>
 						<br />
 						班尼特命座与圣遗物：
 						<br />
@@ -383,7 +429,7 @@
 							<option value=0>0命，圣遗物非四千岩且非四宗室</option>
 							<option value=1>0命，圣遗物四千岩或者四宗室</option>
 							<option value=2>1命及以上，圣遗物非四千岩且非四宗室</option>
-							<option value=3>1命及以上，圣遗物四千岩或者四宗室</option>
+							<option value=3 selected="selected">1命及以上，圣遗物四千岩或者四宗室</option>
 							
 						</select>
 						<br />
@@ -396,12 +442,38 @@
 							<option value=4>5</option>
 							<option value=5>6</option>			
 							<option value=6>7</option>
-							<option value=7 selected="selected">8</option>
+							<option value=7>8</option>
 							<option value=8>9</option>
-							<option value=9>10</option>
+							<option value=9 selected="selected">10</option>
 							<option value=10>11</option>
 							<option value=11>12</option>
 							<option value=12>13</option>
+						</select>
+						<br />
+					</p>
+					<p>
+						砂糖
+						<select id="shatangkaida" style="width: 300px;" onchange="return shatang()">
+							<option value=0 selected="selected">不上场</option>
+							<option value=1>上场</option>
+						</select>
+					</p>
+					<p id="shatangshuju" style="display: none;">
+						砂糖精通：（输入样例：900）
+						<br />
+						<input type="text" value="" id="shatangjingtong"  style="width: 300px;"/>
+						<br />
+						砂糖命座：（6命增加20%元素伤害）
+						<br />
+						<select id="shatangmingzuo" style="width: 300px">
+							<option value=0>6命以下</option>
+							<option value=1 selected="selected">6命</option>
+						</select>
+						<br />
+						砂糖圣遗物：
+						<select id="shatangshengyiwu" style="width: 300px;">
+							<option value=0>非四风套</option>
+							<option value=1 selected="selected">四风套</option>
 						</select>
 					</p>
 				</div>
@@ -409,8 +481,8 @@
 			</section>
 
 
-			<!-- eight -->
-			<section id="eight">
+			<!-- nine -->
+			<section id="nine">
 				<div class="container">
 					<h3>伤害独立乘区</h3>
 					<p>
@@ -424,8 +496,8 @@
 			</section>
 
 
-			<!-- nine -->
-			<section id="nine">
+			<!-- ten -->
+			<section id="ten">
 				<div class="container">
 					<h3>怪物抗性、防御力</h3>
 					<p>
@@ -440,6 +512,7 @@
 							<option value=5>50%抗性</option>
 							<option value=6>70%抗性</option>
 							<option value=7>-20%抗性</option>
+							<option value=8>-40%抗性</option>
 						</select>
 						<br />
 						怪物防御（只与怪物等级、角色等级有关）
@@ -449,17 +522,26 @@
 							<option value=2>12-2上半98级雷丘王</option>
 							<option value=3>12-3上半100级遗迹守卫</option>
 							<option value=4>8级世界91级遗迹守卫</option>
-							<option value=5>8级世界88级丘丘人</option>
+							<option value=5>8级世界85级丘丘人</option>
+							<option value=6>8级世界93级大世界boss</option>
 						</select>
 						<br />
+					</p>
+					<p id="leishenmingzuo" style="display: block;">
+						雷神命座
+						<br />
+						<select id="leishenerming" style="width: 300px;">
+							<option value=0 selected="selected">2命以下</option>
+							<option value=1>2命及2命以上</option>
+						</select>
 					</p>
 					
 				</div>
 
 			</section>
 
-			<!-- ten -->
-			<section id="ten">
+			<!-- eleven -->
+			<section id="eleven">
 				<div class="container">
 					<h3>最终总伤害</h3>
 					<p>
@@ -506,5 +588,7 @@
 	<script src="print.js"></script>
 	<script src="shengyiwu.js"></script>
 	<script src="zengshang.js"></script>
+	<script src="person.js"></script>
+	<script src="settings.js"></script>
 </body>
 </html>

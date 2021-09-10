@@ -4,7 +4,7 @@ function main()
     getpersondengji();
     getinput();
     gettianfu();
-    getjingtong();
+    // getjingtong();
 
     weaponjiacheng();                  //武器加成
 
@@ -20,11 +20,13 @@ function main()
 
     yuansushanghaijiacheng_weapon();     //武器的元素伤害加成
 
-    yuansujiacheng_shengyiwu();
+    yuansujiacheng_shengyiwu();          //圣遗物套装元素伤害加成
 
     yuansujiacheng();                    //元素增伤乘区
 
     bannite_zengshang();                 //班尼特增伤
+
+    shatang_zengshang();                 //砂糖增伤
 
     fanyingjiacheng_jingtong();         //精通、增幅反应乘区
 
@@ -35,8 +37,22 @@ function main()
     getfangyuxuanze();
     getfangyuxishu();                    //怪物防御乘区（等级压制）
 
+
+    dulichengqu();
+
+
     Damage();
-    print();
+
+    
+    if (print_ == 1)
+    {
+        print();
+    }
+    else
+    {
+        print_ = 1;
+    }
+    // alert(qbeilv[2]);
 }
 
 
@@ -58,6 +74,28 @@ function getinput()
     baoshang = parseFloat(baoshang);
 
     baojilv = baojilv / 100;
+
+
+    jingtong = document.getElementById("Personjingtong").value;
+    jingtong = parseFloat(jingtong);
+
+    chongneng = document.getElementById("Personchongneng").value;
+    chongneng = parseFloat(chongneng);
+
+
+    if (person == 1)
+    {
+        yuanlicengshu = document.getElementById("yuanlicengshu").value;
+        yuanlicengshu = parseFloat(yuanlicengshu);
+
+        leishenbaizhi = document.getElementById("leishenbaizhi").value;
+        leishenbaizhi = parseFloat(leishenbaizhi);
+
+        var leishenkaiedocument = document.getElementById("leishenkaie");
+        var leishenkaiexuanze = leishenkaiedocument.selectedIndex;
+        leishenkaiezuobiao = leishenkaiedocument.options[leishenkaiexuanze].value;
+
+    }
 }
 
 
@@ -77,25 +115,62 @@ function gettianfu()
     var q1zuobiao = qdocument.options[qxuanze].value;
     var q2zuobiao = qdocument.options[qxuanze].value;
 
-    abeilv = new Array();
-    for (var i = 0; i < 6; i++)
-        abeilv[i] = shenli_pinga[i][azuobiao];
 
-    ebeilv = shenli_e1[ezuobiao];
-    qbeilv1 = shenli_q1[q1zuobiao];
-    qbeilv2 = shenli_q2[q2zuobiao];
+    if (person == 0)
+    {
+        abeilv = new Array();
+        for (var i = 0; i < 6; i++)
+            abeilv[i] = shenli_pinga[i][azuobiao];
 
-    atianfu = adocument.options[axuanze].value;
-    etianfu = edocument.options[exuanze].value;
-    qtianfu = qdocument.options[qxuanze].value;
+        ebeilv = shenli_e1[ezuobiao];
+        qbeilv1 = shenli_q1[q1zuobiao];
+        qbeilv2 = shenli_q2[q2zuobiao];
+    
 
-    atianfu = parseInt(atianfu);
-    etianfu = parseInt(etianfu);
-    qtianfu = parseInt(qtianfu);
+        atianfu = adocument.options[axuanze].value;
+        etianfu = edocument.options[exuanze].value;
+        qtianfu = qdocument.options[qxuanze].value;
 
-    atianfu += 1;
-    etianfu += 1;
-    qtianfu += 1;
+        atianfu = parseInt(atianfu);
+        etianfu = parseInt(etianfu);
+        qtianfu = parseInt(qtianfu);
+
+        atianfu += 1;
+        etianfu += 1;
+        qtianfu += 1;
+    }
+
+    if (person == 1)
+    {
+        abeilv = new Array();
+
+        ebeilv = new Array();
+
+        qbeilv = new Array();
+
+        for (var i = 0; i < 6; i++)
+        {
+            abeilv[i] = leishen_pinga[i][azuobiao];
+        }
+        
+        for (var i = 0; i < 3; i++)
+            ebeilv[i] = leishen_e[i][ezuobiao];
+            
+        for (var i = 0; i < 12; i++)
+            qbeilv[i] = leishen_q[i][q1zuobiao];
+        
+        atianfu = adocument.options[axuanze].value;
+        etianfu = edocument.options[exuanze].value;
+        qtianfu = qdocument.options[qxuanze].value;
+    
+        atianfu = parseInt(atianfu);
+        etianfu = parseInt(etianfu);
+        qtianfu = parseInt(qtianfu);
+    
+        atianfu += 1;
+        etianfu += 1;
+        qtianfu += 1;
+    }
 
 }
 
@@ -109,13 +184,19 @@ function panduanshifoudazengfufanying()
         zengfufanying = 1;
     else
         zengfufanying = 0;
+    
+    if (person == 1 && zengfufanyingzuobiao == 0)
+    {
+        alert("雷神打不了增幅反应");
+        print_ = 0;
+    }
 }
 
-function getjingtong()
-{
-    jingtong = document.getElementById("Personjingtong").value;
-    jingtong = parseFloat(jingtong);
-}
+// function getjingtong()
+// {
+//     jingtong = document.getElementById("Personjingtong").value;
+//     jingtong = parseFloat(jingtong);
+// }
 
 
 
@@ -133,35 +214,77 @@ function yuansushanghaijiacheng_yuansushanghaibei()
     beizuobiao = beitext.options[beixuanze].value;
     yuansushanghaijiacheng = 1;
     wulishanghaijiacheng = 1;
-    if (beizuobiao == 0)
-        yuansushanghaijiacheng = 1;
-    else if (beizuobiao == 1)
-        yuansushanghaijiacheng = 1.466; //雾切 雾切 冲刺冰伤 二冰套
-    else if (beizuobiao == 2)
-        yuansushanghaijiacheng = 1;
-    else if (beizuobiao == 3)
-        yuansushanghaijiacheng = 1;
-    else if (beizuobiao == 4)
-        yuansushanghaijiacheng = 1;
-    else if (beizuobiao == 5)
-        yuansushanghaijiacheng = 1;
-    else if (beizuobiao == 6)
-        wulishanghaijiacheng = 1.583;
+
+    if (person == 0)
+    {
+        if (beizuobiao == 0)
+            yuansushanghaijiacheng = 1;
+        else if (beizuobiao == 1)
+            yuansushanghaijiacheng = 1.466; //雾切 雾切 冲刺冰伤 二冰套
+        else if (beizuobiao == 2)
+            yuansushanghaijiacheng = 1;
+        else if (beizuobiao == 3)
+            yuansushanghaijiacheng = 1;
+        else if (beizuobiao == 4)
+            yuansushanghaijiacheng = 1;
+        else if (beizuobiao == 5)
+            yuansushanghaijiacheng = 1;
+        else if (beizuobiao == 6)
+            wulishanghaijiacheng = 1.583;
+        else if (beizuobiao == 7)
+            yuansushanghaijiacheng = 1;
+    }
+
+    if (person == 1)
+    {
+        if (beizuobiao == 0)
+            yuansushanghaijiacheng = 1;
+        else if (beizuobiao == 1)
+            yuansushanghaijiacheng = 1;
+        else if (beizuobiao == 2)
+            yuansushanghaijiacheng = 1;
+        else if (beizuobiao == 3)
+            yuansushanghaijiacheng = 1.466;
+        else if (beizuobiao == 4)
+            yuansushanghaijiacheng = 1;
+        else if (beizuobiao == 5)
+            yuansushanghaijiacheng = 1;
+        else if (beizuobiao == 6)
+            wulishanghaijiacheng = 1.583;
+        else if (beizuobiao == 7)
+            yuansushanghaijiacheng = 1;
+    }
 }
 
 
 function yuansujiacheng()
 {
     yuansushanghaijiacheng = yuansushanghaijiacheng + weaponyuansushanghaijiacheng + shengyiwuyuansushanghaijiacheng;
+
+    if (person == 1)
+    {
+        yuansushanghaijiacheng = yuansushanghaijiacheng + (chongneng - 100) * 0.004; 
+    }
 }
 
 
 function fanyingjiacheng_jingtong()
 {
-    if (zengfufanying == 1)
-        zengfufanyingjiacheng = 1.5 + zengfujiacheng;
-    if (zengfufanying == 0)
-        zengfufanyingjiacheng = 1;
+    if (person == 0)
+    {
+        if (zengfufanying == 1)
+            zengfufanyingjiacheng = 1.5 + zengfujiacheng;
+        if (zengfufanying == 0)
+            zengfufanyingjiacheng = 1;
+    }
+
+    if (person == 1)
+    {
+        if (zengfufanying == 0)
+            zengfufanyingjiacheng = 1;
+    }
+
+    
 }
 
 
@@ -198,17 +321,70 @@ function getfangyuxuanze()
     else if (fangyuzuobiao == 4)
         guaiwudengji = 91;
     else if (fangyuzuobiao == 5)
-        guaiwudengji = 88;
+        guaiwudengji = 85;
+    else if (fangyuzuobiao == 6)
+        guaiwudengji = 93;
+
+    if (person == 1)
+    {
+        var leishenmingzuotext = document.getElementById("leishenerming");
+        var leishenmingzuoxuanze = leishenmingzuotext.selectedIndex;
+        leishenmingzuozuobiao = leishenmingzuotext.options[leishenmingzuoxuanze].value;
+
+
+    }
+    
     
 }
 
 
 function getfangyuxishu()
 {
-    if (guaiwudengji == 0)
-        fangyuxishu = 0;
-    else
-        fangyuxishu = (guaiwudengji + 100) / (guaiwudengji + persondengji + 200);
+    if (person == 0)
+    {
+        if (guaiwudengji == 0)
+        {
+            fangyuli = 1;
+            fangyuxishu = fangyuli;
+        }
+        else
+        {
+            fangyuli = (persondengji + 100) / (guaiwudengji + persondengji + 200);
+            fangyuxishu = fangyuli;
+        }
+
+    }
+    
+    if (person == 1)
+    {
+        if (guaiwudengji == 0)
+        {
+            fangyuli = 1;
+            fangyuli_q = 1;
+            fangyuxishu = fangyuli;
+            fangyuxishu_q = fangyuli_q;
+        }
+        else
+        {
+            if (leishenmingzuozuobiao == 1)
+            {
+                fangyuli = (persondengji + 100) / (guaiwudengji + persondengji + 200);
+                fangyuli_q = (persondengji + 100) / (guaiwudengji * 0.4 + persondengji + 140);
+                fangyuxishu = fangyuli;
+                fangyuxishu_q = fangyuli_q;
+            }
+            
+            if (leishenmingzuozuobiao == 0)
+            {
+                fangyuli = (persondengji + 100) / (guaiwudengji + persondengji + 200);
+                fangyuli_q = (persondengji + 100) / (guaiwudengji + persondengji + 200);
+                fangyuxishu = fangyuli;
+                fangyuxishu_q = fangyuli_q;
+            }
+        }
+    }
+
+    
 }
 
 
@@ -233,6 +409,8 @@ function getkangxingxuanze()
         guaiwukangxing = 0.7;
     else if (kangxingzuobiao == 7)
         guaiwukangxing = -0.2;
+    else if (kangxingzuobiao == 8)
+        guaiwukangxing = -0.4;
 
 }
 
@@ -242,62 +420,154 @@ function getkangxingxishu()
     kangxingxishu = 0;
     if (dun == 1)
         guaiwukangxing = guaiwukangxing - 0.2;
+
+    if (shatangzuobiao == 1 && shatang_shengyiwu_zuobiao == 1)
+    {
+        guaiwukangxing = guaiwukangxing - 0.4;
+    }
+    
     if (guaiwukangxing < 0)
         kangxingxishu = 1 - guaiwukangxing / 2;
     else if (guaiwukangxing >= 0.75 )
         kangxingxishu = 1 / (1 + 4 * guaiwukangxing);
     else if (guaiwukangxing >= 0 && guaiwukangxing < 0.75)
         kangxingxishu = 1 - guaiwukangxing;
+
+    
 }
 
 
 
+//独立乘区（绝缘4）
+function dulichengqu()
+{
+    dulichengqujiacheng = 0;
+    if (person == 1)
+    {
+        if (shengyiwuzuobiao == 2)
+        {
+            if (weapon == 8)
+            {
+                jueyuanjiacheng = (chongneng + 30) * 0.01 * 0.25;
+                if (jueyuanjiacheng > 0.75)
+                    jueyuanjiacheng = 0.75
+                dulichengqujiacheng = dulichengqujiacheng + jueyuanjiacheng;
+            }
+            else
+            {
+                jueyuanjiacheng = chongneng * 0.01 * 0.25;
+                if (jueyuanjiacheng > 0.75)
+                    jueyuanjiacheng = 0.75
+                dulichengqujiacheng = dulichengqujiacheng + jueyuanjiacheng;
+            }
+        }
+
+        if (leishenkaiezuobiao == 1)
+        {
+            dulichengqujiacheng = dulichengqujiacheng + 90 * 0.0027;
+        }
+    }
+}
 
 // 计算各种伤害
 function Damage()
 {
-    adamage_feibaoji = new Array();
-    adamage_baoji = new Array();
-    
-    if (baojilv > 1)
-        baojilv = 1;
-
-    if (beizuobiao == 1)
-        wulishanghaijiacheng = yuansushanghaijiacheng;
-    
-    for (var i = 0; i < 6; i++)
+    if (person == 0)
     {
-        adamage_feibaoji[i] = gongjili * wulishanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_pinga_jiacheng * (1 - fangyuxishu) * abeilv[i];
-        adamage_baoji[i] = gongjili * wulishanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_pinga_jiacheng * (1 - fangyuxishu) * abeilv[i] * (100 + baoshang) / 100;
-        adamage_feibaoji[i] = Math.ceil(adamage_feibaoji[i]);
-        adamage_baoji[i] = Math.ceil(adamage_baoji[i]);
+        adamage_feibaoji = new Array();
+        adamage_baoji = new Array();
+        
+        if (baojilv > 1)
+            baojilv = 1;
+
+        if (beizuobiao == 1)
+            wulishanghaijiacheng = yuansushanghaijiacheng;
+        
+        for (var i = 0; i < 6; i++)
+        {
+            adamage_feibaoji[i] = gongjili * wulishanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_pinga_jiacheng * fangyuxishu * abeilv[i];
+            adamage_baoji[i] = gongjili * wulishanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_pinga_jiacheng * fangyuxishu * abeilv[i] * (100 + baoshang) / 100;
+            adamage_feibaoji[i] = Math.ceil(adamage_feibaoji[i]);
+            adamage_baoji[i] = Math.ceil(adamage_baoji[i]);
+        }
+
+
+
+        edamage_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * fangyuxishu * ebeilv;
+        edamage_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * fangyuxishu * ebeilv * (100 + baoshang) / 100;
+
+        qdamage = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * fangyuxishu * (baojilv * (100 + baoshang) / 100 + (1 - baojilv) * 1);
+        qdamagetotal = qdamage * qbeilv1 * 19 + qdamage * qbeilv2 * 1;
+
+        q1_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * fangyuxishu * qbeilv1;
+        q1_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * fangyuxishu * qbeilv1 * (100 + baoshang) / 100;
+        q20_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * fangyuxishu * qbeilv2;
+        q20_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * fangyuxishu * qbeilv2 * (100 + baoshang) / 100;
+
+        if (qbeilv1 >= 2.12)
+            qdamagetotal = qdamagetotal * 1.4;
+
+        gongjili = Math.ceil(gongjili);
+        edamage_feibaoji = Math.ceil(edamage_feibaoji);
+        edamage_baoji = Math.ceil(edamage_baoji);
+        qdamagetotal = Math.ceil(qdamagetotal);
+        q1_feibaoji = Math.ceil(q1_feibaoji);
+        q1_baoji = Math.ceil(q1_baoji);
+        q20_feibaoji = Math.ceil(q20_feibaoji);
+        q20_baoji = Math.ceil(q20_baoji);
     }
 
+    if (person == 1)
+    {
+        adamage_feibaoji = new Array();
+        adamage_baoji = new Array();
+        
+
+        if (weapon == 8)
+        {
+            yuansushanghaijiacheng_q = yuansushanghaijiacheng + 0.12;
+            gongjili_q = gongjili + leishenbaizhi * 0.30 * 0.28;
+        }
+        else
+        {
+            yuansushanghaijiacheng_q = yuansushanghaijiacheng;
+            gongjili_q = gongjili;
+        }
 
 
-    edamage_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * ebeilv;
-    edamage_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * (1 - fangyuxishu) * ebeilv * (100 + baoshang) / 100;
+        if (baojilv > 1)
+            baojilv = 1;
 
-    qdamage = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * (1 - fangyuxishu) * (baojilv * (100 + baoshang) / 100 + (1 - baojilv) * 1);
-    qdamagetotal = qdamage * qbeilv1 * 19 + qdamage * qbeilv2 * 1;
+        if (beizuobiao != 6)
+            wulishanghaijiacheng = 1;
 
-    q1_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * (1 - fangyuxishu) * qbeilv1;
-    q1_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * (1 - fangyuxishu) * qbeilv1 * (100 + baoshang) / 100;
-    q20_feibaoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * (1 - fangyuxishu) * qbeilv2;
-    q20_baoji = gongjili * yuansushanghaijiacheng * zengfufanyingjiacheng * kangxingxishu * shengyiwu_chengqu_dazhao_jiacheng * (1 - fangyuxishu) * qbeilv2 * (100 + baoshang) / 100;
+        for (var i = 0; i < 6; i++)
+        {
+            adamage_feibaoji[i] = gongjili * wulishanghaijiacheng *  kangxingxishu * shengyiwu_chengqu_pinga_jiacheng * fangyuxishu * abeilv[i];
+            adamage_baoji[i] = gongjili * wulishanghaijiacheng *  kangxingxishu * shengyiwu_chengqu_pinga_jiacheng * fangyuxishu * abeilv[i] * (100 + baoshang) / 100;
+            adamage_feibaoji[i] = Math.ceil(adamage_feibaoji[i]);
+            adamage_baoji[i] = Math.ceil(adamage_baoji[i]);
+        }
 
-    if (qbeilv1 >= 2.12)
-        qdamagetotal = qdamagetotal * 1.4;
+        edamage_feibaoji_1 = gongjili * yuansushanghaijiacheng * kangxingxishu * fangyuxishu * ebeilv[0];
+        edamage_baoji_1 = gongjili * yuansushanghaijiacheng * kangxingxishu * fangyuxishu * ebeilv[0] * (100 + baoshang) / 100;
 
-    gongjili = Math.ceil(gongjili);
-    edamage_feibaoji = Math.ceil(edamage_feibaoji);
-    edamage_baoji = Math.ceil(edamage_baoji);
-    qdamagetotal = Math.ceil(qdamagetotal);
-    q1_feibaoji = Math.ceil(q1_feibaoji);
-    q1_baoji = Math.ceil(q1_baoji);
-    q20_feibaoji = Math.ceil(q20_feibaoji);
-    q20_baoji = Math.ceil(q20_baoji);
+        edamage_feibaoji_2 = gongjili * yuansushanghaijiacheng * kangxingxishu * fangyuxishu * ebeilv[1];
+        edamage_baoji_2 = gongjili * yuansushanghaijiacheng * kangxingxishu * fangyuxishu * ebeilv[1] * (100 + baoshang) / 100;
 
-    
+        edamage_feibaoji_1 = Math.ceil(edamage_feibaoji_1);
+        edamage_baoji_1 = Math.ceil(edamage_baoji_1);
+
+        edamage_feibaoji_2 = Math.ceil(edamage_feibaoji_2);
+        edamage_baoji_2 = Math.ceil(edamage_baoji_2);
+
+        qdamage_feibaoji = gongjili_q * (yuansushanghaijiacheng_q + dulichengqujiacheng) * kangxingxishu * fangyuxishu_q * (qbeilv[0] + yuanlicengshu * qbeilv[1]);
+        qdamage_baoji = qdamage_feibaoji * (100 + baoshang) / 100;
+
+        //专武效果：根据白值加攻击力，开大增加30充能，导致开大瞬间攻击力提高，雷伤提高，绝缘效果提高
+
+        qdamage_feibaoji = Math.ceil(qdamage_feibaoji);
+        qdamage_baoji = Math.ceil(qdamage_baoji);
+    }
 }
 
